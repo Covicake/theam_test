@@ -36,7 +36,7 @@ TODO:
 
 DOING:
 
-*Users can manage customers
+* Users can manage customers
     * Customers can have an image, when queried they provide the image url.
     * Customers can create, edit and delete customers.
 
