@@ -10,6 +10,18 @@ All you need to do to run the server is install the dependencies with: `npm inst
 
 The database information is stored in 'ormconfig.json' at the projects root, I didn't upload that file, but you can build your own [following this instructions](http://typeorm.io/#/using-ormconfig/)
 
+---
+
+## Technologies used:
+
+* Node.js + Express framework.
+* TypeScript
+* TypeORM
+* Passport middleware for authentication.
+
+---
+
+## Journal:
 
 TODO:
 
