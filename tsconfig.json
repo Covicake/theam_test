@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src/server.ts",
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+        "dom",
+        "es2017"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+
+}
