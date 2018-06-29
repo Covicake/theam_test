@@ -4,7 +4,7 @@ REST API to manage a little shop.
 
 ---
 
-##Getting started:
+## Getting started:
 
 All you need to do to run the server is install the dependencies with: `npm install` and then start the server with `npm run start`.
 
