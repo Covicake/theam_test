@@ -7,6 +7,7 @@ import { createConnection } from 'typeorm';
 import { UserRepository } from './Repository/User-Repository';
 
 import * as userRouter from './api/user';
+import * as customerRouter from './api/customer';
 import { login } from './controller';
 
 createConnection().then(connection => {  // Establish conection between typeORM and database using the ormconfig.json file.
@@ -28,6 +29,7 @@ app.post('/login', (req, res, next) => {
 });
 
 app.use('/user', passport.authenticate('bearer', { session: false }), userRouter);
+app.use('/customer', passport.authenticate('bearer', { session: false}), customerRouter);
 
 app.listen(3000, () => {
     console.log('Ready on port 3000!');

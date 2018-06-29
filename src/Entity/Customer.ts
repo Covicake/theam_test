@@ -25,7 +25,4 @@ export class Customer {
         nullable: false
     })
     imagePath: string;
-
-    @Column()
-    isAdmin: boolean;
 }
