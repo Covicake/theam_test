@@ -10,6 +10,8 @@ import * as userRouter from './api/user';
 import * as customerRouter from './api/customer';
 import { login } from './controller';
 
+import * as path from 'path';
+
 createConnection().then(connection => {  // Establish conection between typeORM and database using the ormconfig.json file.
 }).catch(error => console.log(error));
 
@@ -23,6 +25,9 @@ passport.use(new Strategy((token, cb) => {
       cb(undefined, user);
     }).catch(err => cb(err));
   }));
+
+app.use('/static', passport.authenticate('bearer', { session: false }), express.static(path.resolve(__dirname, 'images')));
+
 
 app.post('/login', (req, res, next) => {
     login(req.body).then((response) => res.send(response)).catch((err) => res.send(err));

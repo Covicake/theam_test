@@ -1,2 +1,4 @@
 node_modules
 ormconfig.json
+package-lock.json
+/src/images/

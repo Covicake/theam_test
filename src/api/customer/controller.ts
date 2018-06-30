@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { CustomerRepository } from '../../Repository/Customer-Repository';
 import { Customer } from '../../Entity/Customer';
+import { v1 as uuid } from 'uuid';
 
 const customerRepo = new CustomerRepository();
 
@@ -8,9 +9,11 @@ export function createCustomer(customerData: Customer, uploadPhoto): Promise<Cus
     return new Promise((resolve, reject) => {
         if (uploadPhoto) {
             const customerPhoto = uploadPhoto.imagePath;
-            const photoUrl = path.resolve(__dirname, './images/' + customerData.name + '.jpg');
+            const photoUrl = path.resolve(__dirname, '../../images/' + uuid() + '.jpg');
             customerData.imagePath = photoUrl;
             customerPhoto.mv(photoUrl).then(() => resolve(customerRepo.createCustomer(customerData))).catch((err) => reject(err));
+        } else {
+            resolve(customerRepo.createCustomer(customerData));
         }
     });
 }
