@@ -27,8 +27,6 @@ TODO:
 
 * Users can manage customers
     * Customers have name, surname and Id as required information
-    * Customers can have an image, when queried they provide the image url.
-    * Users can create, edit and delete customers.
     * Customers store information of the user who created them and the last user who updated them.
 * Admin condition
     * Admins can manage users (create, update, delete).
@@ -38,7 +36,6 @@ DOING:
 
 * Users can manage customers
     * Customers can have an image, when queried they provide the image url.
-    * Customers can create, edit and delete customers.
 
 DONE:
 
@@ -47,4 +44,5 @@ DONE:
 * Customers database
 * Users can manage customers
     * Users can view a list of customers
+    * Users can create, edit and delete customers.
 
