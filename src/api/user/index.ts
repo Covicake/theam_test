@@ -1,11 +1,15 @@
 import * as express from 'express';
-// import { getCustomers } from './controller';
+import { getUsersList } from './controller';
 
 const userRouter = express.Router();
 
 userRouter.get('/', (req, res, next) => {
-   res.send('Hello, user!');
+   if (req.user.isAdmin) {
+        getUsersList().then((response) => res.send(response)).catch((err) => res.send(err));
+   }
 });
+
+
 
 
 export = userRouter;
