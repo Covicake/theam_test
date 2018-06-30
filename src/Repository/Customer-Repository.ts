@@ -3,16 +3,14 @@ import { Customer } from '../Entity/Customer';
 
 export class CustomerRepository {
 
-    createCustomer(customer: Customer): Customer {
-        return getManager().getRepository(Customer).create(customer);
+    createCustomer(customer: Customer): Promise<Customer> {
+        return getManager().getRepository(Customer).save(customer);
         }
 
     getCustomersList(): Promise<Customer[]> {
-        return getManager().getRepository(Customer).createQueryBuilder()
-            .select('id')
-            .addSelect('name')
-            .addSelect('lastName')
-            .getMany();
+        return getManager().getRepository(Customer).createQueryBuilder('Customer')
+        .select(['Customer.id', 'Customer.name', 'Customer.lastName'])
+        .getMany();
         }
 
     getCustomer(customerId: number): Promise<Customer> {

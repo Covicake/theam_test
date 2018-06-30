@@ -9,8 +9,9 @@ export function createCustomer(customerData: Customer, uploadPhoto): Promise<Cus
     return new Promise((resolve, reject) => {
         if (uploadPhoto) {
             const customerPhoto = uploadPhoto.imagePath;
-            const photoUrl = path.resolve(__dirname, '../../images/' + uuid() + '.jpg');
-            customerData.imagePath = photoUrl;
+            const imageName = uuid();
+            const photoUrl = path.resolve(__dirname, '../../images/' + imageName + '.jpg');
+            customerData.imagePath = imageName;
             customerPhoto.mv(photoUrl).then(() => resolve(customerRepo.createCustomer(customerData))).catch((err) => reject(err));
         } else {
             resolve(customerRepo.createCustomer(customerData));
