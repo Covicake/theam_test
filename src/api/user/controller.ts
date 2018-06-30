@@ -3,12 +3,14 @@ import { v1 as uuid } from 'uuid';
 
 const userRepo = new UserRepository();
 
-export function login(body) {
+export function getUsersList() {
     return new Promise((resolve, reject) => {
-        userRepo.login(body.user, body.pass).then((queryResult) => {
-            const newAuthToken = uuid();
-            queryResult.token = newAuthToken;
-            userRepo.updateUserToken(queryResult).then(() => resolve(newAuthToken));
-        }).catch((err) => reject(err));
+        userRepo.getUsersList().then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
+    });
+}
+
+export function getUser(userId: number) {
+    return new Promise((resolve, reject) => {
+        userRepo.findUserById(userId).then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
     });
 }
