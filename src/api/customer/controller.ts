@@ -7,14 +7,16 @@ const customerRepo = new CustomerRepository();
 
 export function createCustomer(customerData: Customer, uploadPhoto): Promise<Customer> {
     return new Promise((resolve, reject) => {
-        if (uploadPhoto) {
+        if (uploadPhoto && customerData.name && customerData.lastName) {
             const customerPhoto = uploadPhoto.imagePath;
             const imageName = uuid();
             const photoUrl = path.resolve(__dirname, '../../images/' + imageName + '.jpg');
             customerData.imagePath = imageName;
             customerPhoto.mv(photoUrl).then(() => resolve(customerRepo.createCustomer(customerData))).catch((err) => reject(err));
-        } else {
+        } else if (customerData.name && customerData.lastName) {
             resolve(customerRepo.createCustomer(customerData));
+        } else {
+            customerData.name !== undefined ? reject('Lastname required') : reject('Name required');
         }
     });
 }
