@@ -29,12 +29,21 @@ The database information is stored in 'ormconfig.json' at the projects root, I d
 
 TODO:
 
-* Admin condition
+* Encription
+    * encrypt password before saving to database.
+    * encrypt password before checking with database for login.
+    * create .env to store salt for encription.
 
+* Forms
+    * Check data types before saving to database.
+    * Sanitize data to avoid sql injection
+
+* File uploads
+    * Accept only image formats
+    * Keep original format
+        
 DOING:
 
-* Admin condition
-    * Admins can provide or revoke admin rights to users.
 
 DONE:
 
@@ -49,3 +58,5 @@ DONE:
     * Customers store information of the user who created them and the last user who updated them.
 * Admin condition
     * Admins can manage users (create, update, delete).
+    * Admins can provide or revoke admin rights to users.
+
