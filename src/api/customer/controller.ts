@@ -30,3 +30,18 @@ export function getCustomer(customerId: number): Promise<Customer> {
         customerRepo.getCustomer(customerId).then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
     });
 }
+
+export function updateCustomerData(customerId: number, customerData: Customer): Promise<number> {
+    return new Promise((resolve, reject) => {
+        customerRepo.getCustomer(customerId).then((queryResult) => {
+            queryResult = {...customerData};
+            customerRepo.updateCustomer(customerId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
+        });
+    });
+}
+
+export function deleteCustomer(customerId: number): Promise<number> {
+    return new Promise((resolve, reject) => {
+        customerRepo.deleteCustomer(customerId).then(() => resolve(200)).catch((err) => reject(err));
+    });
+}
