@@ -26,7 +26,6 @@ The database information is stored in 'ormconfig.json' at the projects root, I d
 TODO:
 
 * Users can manage customers
-    * Customers have name, surname and Id as required information
     * Customers store information of the user who created them and the last user who updated them.
 * Admin condition
     * Admins can manage users (create, update, delete).
@@ -43,6 +42,7 @@ DONE:
 * Users database
 * Customers database
 * Users can manage customers
+    * Customers have name, surname and Id as required information
     * Users can view a list of customers
     * Users can create, edit and delete customers.
 
