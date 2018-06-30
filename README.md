@@ -26,12 +26,11 @@ The database information is stored in 'ormconfig.json' at the projects root, I d
 TODO:
 
 * Admin condition
-    * Admins can manage users (create, update, delete).
-    * Admins can provide or revoke admin rights to users.
 
 DOING:
 
 * Admin condition
+    * Admins can provide or revoke admin rights to users.
 
 DONE:
 
@@ -44,3 +43,5 @@ DONE:
     * Users can create, edit and delete customers.
     * Customers can have an image, when queried they provide the image url.
     * Customers store information of the user who created them and the last user who updated them.
+* Admin condition
+    * Admins can manage users (create, update, delete).
