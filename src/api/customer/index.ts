@@ -20,7 +20,7 @@ customerRouter.get('/:id', (req, res, next) => {
  });
 
 customerRouter.put('/:id', (req, res, next) => {
-    updateCustomerData(req.user.userName, req.params.id, req.body).then((response) => res.send(response)).catch((err) => res.send(err));
+    updateCustomerData(req.user.userName, req.params.id, req.body, req.files).then((response) => res.send(response)).catch((err) => res.send(err));
 });
 
 customerRouter.delete('/:id', (req, res, next) => {

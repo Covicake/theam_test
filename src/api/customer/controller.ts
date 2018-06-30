@@ -34,13 +34,21 @@ export function getCustomer(customerId: number): Promise<Customer> {
     });
 }
 
-export function updateCustomerData(userName: string, customerId: number, customerData: Customer): Promise<number> {
+export function updateCustomerData(userName: string, customerId: number, customerData: Customer, uploadPhoto): Promise<number> {
     return new Promise((resolve, reject) => {
         customerData.lastUpdatedBy = userName;
         customerRepo.getCustomer(customerId).then((queryResult) => {
-            queryResult = {...customerData};
-            customerRepo.updateCustomer(customerId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
-        });
+            if (uploadPhoto) {
+                const customerPhoto = uploadPhoto.imagePath;
+                const imageName = queryResult.imagePath;
+                const photoUrl = path.resolve(__dirname, '../../images/' + imageName + '.jpg');
+                queryResult = {...customerData};
+                queryResult.imagePath = imageName;
+                Promise.all([customerPhoto.mv(photoUrl), customerRepo.updateCustomer(customerId, queryResult)]).then(() => resolve(200)).catch((err) => reject(err));
+            } else {
+                customerRepo.updateCustomer(customerId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
+            }
+        }).catch((err) => reject(err));
     });
 }
 
