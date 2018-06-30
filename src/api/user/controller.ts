@@ -34,3 +34,12 @@ export function deleteUser(userId: number) {
         userRepo.deleteUser(userId).then(() => resolve(200)).catch((err) => reject(err));
     });
 }
+
+export function setPrivileges(userId, newValue: boolean) {
+    return new Promise((resolve, reject) => {
+        userRepo.findUserById(userId).then((queryResult) => {
+            queryResult.isAdmin = newValue;
+            userRepo.updateUserData(userId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
+        }).catch((err) => reject(err));
+    });
+}

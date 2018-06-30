@@ -15,9 +15,13 @@ The database information is stored in 'ormconfig.json' at the projects root, I d
 ## Technologies used:
 
 * Node.js + Express framework.
+    Express has a very big comunity of users so it's easy to find information when you can't figure out a way of doing something. I also like the way the design it encourages.
 * TypeScript
+    TypeScript helps a lot during the development stage providing typing so you don't make silly mistakes.
 * TypeORM
+    A really usefull ORM to connect Node.js with MySQL (and others). It supports a MVC pattern design without too much effort.
 * Passport middleware for authentication.
+    Is easy to use and provides all the functionalities needed in this project. It also supports Oauth2 with most third party providers (Facebook, Google, Twitter...).
 
 ---
 
