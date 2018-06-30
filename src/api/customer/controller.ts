@@ -5,8 +5,9 @@ import { v1 as uuid } from 'uuid';
 
 const customerRepo = new CustomerRepository();
 
-export function createCustomer(customerData: Customer, uploadPhoto): Promise<Customer> {
+export function createCustomer(userName: string, customerData: Customer, uploadPhoto): Promise<Customer> {
     return new Promise((resolve, reject) => {
+        customerData.createdBy = userName;
         if (uploadPhoto && customerData.name && customerData.lastName) {
             const customerPhoto = uploadPhoto.imagePath;
             const imageName = uuid();
@@ -33,8 +34,9 @@ export function getCustomer(customerId: number): Promise<Customer> {
     });
 }
 
-export function updateCustomerData(customerId: number, customerData: Customer): Promise<number> {
+export function updateCustomerData(userName: string, customerId: number, customerData: Customer): Promise<number> {
     return new Promise((resolve, reject) => {
+        customerData.lastUpdatedBy = userName;
         customerRepo.getCustomer(customerId).then((queryResult) => {
             queryResult = {...customerData};
             customerRepo.updateCustomer(customerId, queryResult).then(() => resolve(200)).catch((err) => reject(err));

@@ -25,4 +25,10 @@ export class Customer {
         nullable: false
     })
     imagePath: string;
+
+    @Column()
+    createdBy: string;
+
+    @Column()
+    lastUpdatedBy: string;
 }

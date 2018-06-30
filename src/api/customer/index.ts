@@ -7,11 +7,12 @@ const customerRouter = express.Router();
 customerRouter.use(fileUpload());
 
 customerRouter.post('/', (req, res, next) => {
-    createCustomer(req.body, req.files).then((response) => res.send(response)).catch((err) => res.send(err));
+    createCustomer(req.user.userName, req.body, req.files).then((response) => res.send(response)).catch((err) => res.send(err));
 });
 
  customerRouter.get('/', (req, res, next) => {
-   getCustomersList().then((response) => res.send(response)).catch((err) => res.send(err));
+    console.log(req.user);
+    getCustomersList().then((response) => res.send(response)).catch((err) => res.send(err));
  });
 
 customerRouter.get('/:id', (req, res, next) => {
@@ -19,7 +20,7 @@ customerRouter.get('/:id', (req, res, next) => {
  });
 
 customerRouter.put('/:id', (req, res, next) => {
-    updateCustomerData(req.params.id, req.body).then((response) => res.send(response)).catch((err) => res.send(err));
+    updateCustomerData(req.user.userName, req.params.id, req.body).then((response) => res.send(response)).catch((err) => res.send(err));
 });
 
 customerRouter.delete('/:id', (req, res, next) => {
