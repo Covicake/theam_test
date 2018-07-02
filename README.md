@@ -10,18 +10,27 @@ All you need to do to run the server is install the dependencies with: `npm inst
 
 The database information is stored in 'ormconfig.json' at the projects root, I didn't upload that file, but you can build your own [following this instructions](http://typeorm.io/#/using-ormconfig/)
 
+The encription needs a secret string, which you have to provide to the file ./config.ts with the following format:
+```
+module.exports = {
+    secret = 'YOURSECRETSTRING'
+};
+```
+
 ---
 
 ## Technologies used:
 
-* Node.js + Express framework.
+* Node.js + Express framework:
     Express has a very big comunity of users so it's easy to find information when you can't figure out a way of doing something. I also like the way the design it encourages.
-* TypeScript
-    helps a lot during the development stage providing typing so you don't make silly mistakes.
-* TypeORM
+* TypeScript:
+    Helps a lot during the development stage providing typing so you don't make silly mistakes.
+* TypeORM:
     A really usefull ORM to connect Node.js with MySQL (and others). It supports a MVC pattern design without too much effort.
 * JSONwebtoken & Express-jwt:
-    jsonwebtoken provides an easy way to create a token using the user information and a salt, and sets a timelimit in which the token can be used before a new login is required. Express-jwt provides an easy way to check if a given token is valid and decode it to get the user data stored in it.
+    JsonWebToken provides an easy way to create a token using the user information and a salt, and sets a timelimit in which the token can be used before a new login is required. Express-jwt provides an easy way to check if a given token is valid and decode it to get the user data stored in it.
+* Bcrypt:
+    This library encrypts any incoming password before saving to database or compares the incoming password with the one stored in the encrypted one in the database.
 
 ---
 
