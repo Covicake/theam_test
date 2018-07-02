@@ -57,7 +57,7 @@ DONE:
 * Admin condition
     * Admins can manage users (create, update, delete).
     * Admins can provide or revoke admin rights to users.
-* Encription
+* Encryption
     * create config.ts to store salt for encryption.
     * encrypt password before saving to database.
     * encrypt password before checking with database for login.
