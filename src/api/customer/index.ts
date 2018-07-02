@@ -11,7 +11,6 @@ customerRouter.post('/', (req, res, next) => {
 });
 
  customerRouter.get('/', (req, res, next) => {
-    console.log(req.user);
     getCustomersList().then((response) => res.send(response)).catch((err) => res.send(err));
  });
 

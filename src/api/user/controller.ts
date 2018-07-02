@@ -1,10 +1,19 @@
 import { UserRepository } from '../../Repository/User-Repository';
+import * as bcrypt from 'bcrypt';
+const config = require('../../../config');
 
 const userRepo = new UserRepository();
 
-export function createUser(userdata) {
+function hashPass(password) {
+    return bcrypt.hash(password, 10);
+}
+
+export function createUser(userData) {
     return new Promise((resolve, reject) => {
-        userRepo.createUser(userdata).then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
+        hashPass(userData.password).then((hashed) => {
+            userData.password = hashed;
+            userRepo.createUser(userData).then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
+        }).catch((err) => console.log(err));
     });
 }
 
@@ -23,8 +32,12 @@ export function getUser(userId: number) {
 export function updateUser(userId: number, userData) {
     return new Promise((resolve, reject) => {
         userRepo.findUserById(userId).then((queryResult) => {
-            queryResult = {...userData};
-            userRepo.updateUserData(userId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
+            hashPass(userData.password).then((hashed) => {
+                userData.password = hashed;
+                queryResult = {...userData};
+                userRepo.updateUserData(userId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
+                queryResult = {...userData};
+            }).catch((err) => reject(err));
         }).catch((err) => reject(err));
     });
 }

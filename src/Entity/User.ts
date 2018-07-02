@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -14,14 +14,14 @@ export class User {
     @Column()
     birthYear: number;
 
-    @Column()
+    @Column({
+        unique: true,
+        length: 150
+    })
     userName: string;
 
     @Column()
     password: string;
-
-    @Column()
-    token: string;
 
     @Column()
     isAdmin: boolean;

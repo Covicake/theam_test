@@ -1,7 +1,13 @@
 import * as express from 'express';
 import { createUser, getUsersList, getUser, updateUser, deleteUser, setPrivileges } from './controller';
+import { UserRepository } from '../../Repository/User-Repository';
 
 const userRouter = express.Router();
+const userRepo = new UserRepository();
+
+userRouter.use((req, res, next) => {
+    userRepo.findUserByUsername(req.user.userName).then(() => next()).catch((err) => res.send('Invalid token'));
+});
 
 userRouter.post('/', (req, res, next) => {
     if (req.user.isAdmin) {
@@ -12,6 +18,7 @@ userRouter.post('/', (req, res, next) => {
 });
 
 userRouter.get('/', (req, res, next) => {
+    console.log(req.user);
    if (req.user.isAdmin) {
         getUsersList().then((response) => res.send(response)).catch((err) => res.send(err));
    } else {
