@@ -1,6 +1,7 @@
 import { UserRepository } from './Repository/User-Repository';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+
 const config = require('../config');
 
 const userRepo = new UserRepository();
@@ -9,7 +10,6 @@ const userData = [];  // Holds the userName and admin condition of the user tryi
 
 async function checkPassword(userName, password) {
     let comparisonResult;
-
     await userRepo.findUserByUsername(userName).then((queryResult) => {
         userData.push(queryResult.userName);
         userData.push(queryResult.isAdmin);

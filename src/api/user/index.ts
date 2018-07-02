@@ -18,7 +18,6 @@ userRouter.post('/', (req, res, next) => {
 });
 
 userRouter.get('/', (req, res, next) => {
-    console.log(req.user);
    if (req.user.isAdmin) {
         getUsersList().then((response) => res.send(response)).catch((err) => res.send(err));
    } else {
@@ -52,7 +51,7 @@ userRouter.delete('/:id', (req, res, next) => {
 
 userRouter.post('/:id', (req, res, next) => {
     if (req.user.isAdmin) {
-        setPrivileges(req.params.id, req.body).then(() => res.status(200)).catch((err) => res.send(err));
+        setPrivileges(req.params.id, req.body).then(() => res.send(200)).catch((err) => res.send(err));
     } else {
         res.send(401);
     }

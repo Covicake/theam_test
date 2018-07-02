@@ -1,5 +1,7 @@
 import { UserRepository } from '../../Repository/User-Repository';
 import * as bcrypt from 'bcrypt';
+import { User } from '../../Entity/User';
+
 const config = require('../../../config');
 
 const userRepo = new UserRepository();
@@ -10,6 +12,9 @@ function hashPass(password) {
 
 export function createUser(userData) {
     return new Promise((resolve, reject) => {
+        if (typeof(userData.isAdmin) !== typeof(true)) {
+            reject('isAdmin must be boolean');
+        }
         hashPass(userData.password).then((hashed) => {
             userData.password = hashed;
             userRepo.createUser(userData).then((queryResult) => resolve(queryResult)).catch((err) => reject(err));
@@ -31,6 +36,9 @@ export function getUser(userId: number) {
 
 export function updateUser(userId: number, userData) {
     return new Promise((resolve, reject) => {
+        if (typeof(userData.isAdmin) !== typeof(true)) {
+            reject('isAdmin must be boolean');
+        }
         userRepo.findUserById(userId).then((queryResult) => {
             hashPass(userData.password).then((hashed) => {
                 userData.password = hashed;
@@ -48,11 +56,17 @@ export function deleteUser(userId: number) {
     });
 }
 
-export function setPrivileges(userId, newValue: boolean) {
+export function setPrivileges(userId, newValue: User) {
     return new Promise((resolve, reject) => {
-        userRepo.findUserById(userId).then((queryResult) => {
-            queryResult.isAdmin = newValue;
-            userRepo.updateUserData(userId, queryResult).then(() => resolve(200)).catch((err) => reject(err));
-        }).catch((err) => reject(err));
+        if (typeof(newValue.isAdmin) !== typeof(true)) {
+            reject('Input data must be boolean');
+        } else {
+            userRepo.findUserById(userId).then((queryResult) => {
+                queryResult.isAdmin = newValue.isAdmin;
+                userRepo.updateUserData(userId, queryResult).then((response) => {
+                    resolve(response);
+                }).catch((err) => reject(err));
+            }).catch((err) => reject(err));
+        }
     });
 }

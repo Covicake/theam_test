@@ -10,8 +10,9 @@ export function createCustomer(userName: string, customerData: Customer, uploadP
         customerData.createdBy = userName;
         if (uploadPhoto && customerData.name && customerData.lastName) {
             const customerPhoto = uploadPhoto.imagePath;
-            const imageName = uuid();
-            const photoUrl = path.resolve(__dirname, '../../images/' + imageName + '.jpg');
+            const extension = customerPhoto.mimetype.split('/');
+            const imageName = uuid() + '.' + extension[1];
+            const photoUrl = path.resolve(__dirname, '../../images/' + imageName);
             customerData.imagePath = imageName;
             customerPhoto.mv(photoUrl).then(() => resolve(customerRepo.createCustomer(customerData))).catch((err) => reject(err));
         } else if (customerData.name && customerData.lastName) {
@@ -41,7 +42,7 @@ export function updateCustomerData(userName: string, customerId: number, custome
             if (uploadPhoto) {
                 const customerPhoto = uploadPhoto.imagePath;
                 const imageName = queryResult.imagePath;
-                const photoUrl = path.resolve(__dirname, '../../images/' + imageName + '.jpg');
+                const photoUrl = path.resolve(__dirname, '../../images/' + imageName);
                 queryResult = {...customerData};
                 queryResult.imagePath = imageName;
                 Promise.all([customerPhoto.mv(photoUrl), customerRepo.updateCustomer(customerId, queryResult)]).then(() => resolve(200)).catch((err) => reject(err));

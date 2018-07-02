@@ -12,7 +12,7 @@ export class User {
     lastName: string;
 
     @Column()
-    birthYear: number;
+    birthYear: string;
 
     @Column({
         unique: true,

@@ -4,7 +4,7 @@ import * as fileUpload from 'express-fileupload';
 import { createCustomer, getCustomersList, getCustomer, updateCustomerData, deleteCustomer } from './controller';
 
 const customerRouter = express.Router();
-customerRouter.use(fileUpload());
+customerRouter.use(fileUpload({ safeFileNames: true}));
 
 customerRouter.post('/', (req, res, next) => {
     createCustomer(req.user.userName, req.body, req.files).then((response) => res.send(response)).catch((err) => res.send(err));
