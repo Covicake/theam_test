@@ -6,7 +6,7 @@ REST API to manage a little shop.
 
 ## Getting started:
 
-All you need to do to run the server is install the dependencies with: `npm install` and then start the server with `npm run start`.
+All you need to do to run the server is install the dependencies with: `npm install --production` and then start the server with `npm run start`.
 
 The database information is stored in 'ormconfig.json' at the projects root, I didn't upload that file, but you can build your own [following this instructions](http://typeorm.io/#/using-ormconfig/)
 
