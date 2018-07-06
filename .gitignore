@@ -1,5 +1,5 @@
 node_modules
-ormconfig.json
 package-lock.json
 /src/images/
 config.ts
+tslint.json

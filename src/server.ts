@@ -9,7 +9,7 @@ import { login } from './controller';
 
 import * as jwt from 'jsonwebtoken';
 import * as expressJwt from 'express-jwt';
-const config = require('../config');
+const config = require('./config');
 
 import * as path from 'path';
 

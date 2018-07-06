@@ -1,0 +1,20 @@
+{
+   "type": "mysql",
+   "host": "172.17.0.2",
+   "port": 3306,
+   "username": "root",
+   "password": "rott",
+   "database": "crm",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "src/Entity/**/*.ts",
+      "src/Entity/**/*.js"
+   ],
+   "migrations": [
+      "src/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ]
+}

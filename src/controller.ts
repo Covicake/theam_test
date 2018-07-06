@@ -2,13 +2,14 @@ import { UserRepository } from './Repository/User-Repository';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 
-const config = require('../config');
+const config = require('./config');
 
 const userRepo = new UserRepository();
 
 const userData = [];  // Holds the userName and admin condition of the user trying to log in.
 
 async function checkPassword(userName, password) {
+    console.log(userName, password);
     let comparisonResult;
     await userRepo.findUserByUsername(userName).then((queryResult) => {
         userData.push(queryResult.userName);
@@ -21,6 +22,7 @@ async function checkPassword(userName, password) {
 
 export function login(body) {
     return new Promise((resolve, reject) => {
+        console.log(body);
         const results = checkPassword(body.userName, body.password);
         results.then((isValid) => {
             if (isValid !== true) {

@@ -4,11 +4,11 @@ import { UserRepository } from '../../Repository/User-Repository';
 
 const userRouter = express.Router();
 const userRepo = new UserRepository();
-
+/*
 userRouter.use((req, res, next) => {
-    userRepo.findUserByUsername(req.user.userName).then(() => next()).catch((err) => res.send('Invalid token'));
+    userRepo.findUserByUsername(req.user.userName).then(() => next()).catch((err) => res.send('Invalid token'));  // Checks if token matches an existing user.
 });
-
+*/
 userRouter.post('/', (req, res, next) => {
     if (req.user.isAdmin) {
         createUser(req.body).then((response) => res.send(response)).catch((err) => res.send(err));

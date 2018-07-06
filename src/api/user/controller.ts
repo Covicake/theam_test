@@ -2,8 +2,6 @@ import { UserRepository } from '../../Repository/User-Repository';
 import * as bcrypt from 'bcrypt';
 import { User } from '../../Entity/User';
 
-const config = require('../../../config');
-
 const userRepo = new UserRepository();
 
 function hashPass(password) {
