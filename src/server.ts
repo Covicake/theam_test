@@ -27,7 +27,7 @@ app.use(express.json());  // Tells express to parse the request as a json file.
 
 const authenticate = expressJwt({secret : config.secret});  // A function to check if a token is valid, if so decode it and return the underlying user data.
 
-app.use((req, res, next) => {
+app.get('/', (req, res, next) => {
     userRepo.getUsersList().then((result) => {
         if (result.length == 0) {
             const newUser = new User;
