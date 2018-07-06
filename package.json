@@ -30,6 +30,7 @@
     "reflect-metadata": "^0.1.12",
     "ts-node": "^7.0.0",
     "typeorm": "^0.2.7",
+    "typescript": "^2.9.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -41,7 +42,6 @@
     "@types/node": "^10.5.1",
     "@types/uuid": "^3.4.3",
     "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.9.2"
+    "tslint-config-prettier": "^1.13.0"
   }
 }
