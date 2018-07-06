@@ -22,7 +22,7 @@ That being done, we can start the container with the api. To do so, type in the 
 docker run --name api_container_name -p 3000:3000 --link mysql_container_name api_image_name
 ```
 
-Now everything is running, but since the api requires a logged in user in order to create more users, you have to make a get request to the root endpoint, this will automatically create a new user (only if there are no other users created) with userName: "admin" and password: "1". Use this user to create a new one, and don't forget to delete this user after that!
+Now everything is running, but since the api requires a logged-in user in order to create more users, you have to make a get request to the root endpoint, this will automatically create a new user (only if there are no other users created) with userName: "admin" and password: "1". Use this user to create a new one, and don't forget to delete this user after that!
 
 Now you can log in with userName: admin and password: "1". Make sure to create a new admin user and delete the one you created earlier.
 
