@@ -30,16 +30,16 @@ const authenticate = expressJwt({secret : config.secret});  // A function to che
 app.get('/', (req, res, next) => {
     userRepo.getUsersList().then((result) => {
         if (result.length == 0) {
-            const newUser = new User;
+            const newUser = new User();
             newUser.name = 'admin';
             newUser.lastName = 'admin';
             newUser.isAdmin = true;
             newUser.userName = 'admin';
-            hashPass("1").then((hashed) => {
+            hashPass('1').then((hashed) => {
                 newUser.password = hashed;
                 userRepo.createUser(newUser).then(() => next()).catch(() => next());
             });
-        } else next();
+        } else { next(); }
     });
 });
 
