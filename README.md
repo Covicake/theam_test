@@ -22,16 +22,7 @@ That being done, we can start the container with the api. To do so, type in the 
 docker run --name api_container_name -p 3000:3000 --link mysql_container_name api_image_name
 ```
 
-Now everything is running, but since the api requires a logged in user, we have to input it directly to the database to be the first admin. Let's do it, get another console and type in: 
-```
-docker exec -it mysql_container_name mysql -u root -p 
-``` 
-you will be prompted to input the password you set at ormconfig.json and then you get an instance of mysql, type in:
-```
-use crm;
-INSERT INTO user (name, lastName, userName, password, isAdmin) VALUES ("some name" "some lastname", "admin", "$2b$10$6fgpyVjv9qKmKu4kV1NRWOAG82lFrgtyJttfc2wrzS7bHdw1bUY8.', true");
-exit;
-```
+Now everything is running, but since the api requires a logged in user in order to create more users, you have to make a get request to the root endpoint, this will automatically create a new user (only if there are no other users created) with userName: "admin" and password: "1". Use this user to create a new one, and don't forget to delete this user after that!
 
 Now you can log in with userName: admin and password: "1". Make sure to create a new admin user and delete the one you created earlier.
 

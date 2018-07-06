@@ -27,6 +27,7 @@
     "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.3.0",
     "mysql2": "^1.5.3",
+    "node-pre-gyp": "^0.10.2",
     "reflect-metadata": "^0.1.12",
     "ts-node": "^7.0.0",
     "typeorm": "^0.2.7",

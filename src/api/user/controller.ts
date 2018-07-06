@@ -4,7 +4,7 @@ import { User } from '../../Entity/User';
 
 const userRepo = new UserRepository();
 
-function hashPass(password) {
+export function hashPass(password) {
     return bcrypt.hash(password, 10);
 }
 
