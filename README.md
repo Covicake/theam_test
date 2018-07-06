@@ -16,7 +16,7 @@ module.exports = {
     secret = 'YOURSECRETSTRING'
 };
 ```
-
+Now you have everything ready, start the server. You will need a user to use the application, so let's create one. All you have to do is make a get request to the root of your host (for example: localhost:3000/) and it will automatically create a new user when there are no other users in the database. UserName: "admin", password: "1" (it's a string). Now with this user you can create more, check the api documentation for more detailes and don't forget to delete this admin when you have created your own!
 ---
 
 ## Technologies used:
