@@ -10,7 +10,10 @@ This version can run inside a docker container, let's set it up!
 
 First of all we need to build the image, so let's open a console in the project's folder and type ```docker build -t api_image_name .```, this step might take a while, so while it builds the container we can get the mysql container from dockerhub, let's open another console and type: ```docker pull mysql```
 
-When both of them finish, it's time to start the mysql container, so type: ```docker run --name mysql_container_name -e MYSQL_ROOT_PASSWORD=password_at_ormconfig.json -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=crm -d -p port_at_ormconfig.json:3306 mysql/mysql-server:5.7
+When both of them finish, it's time to start the mysql container, so type: 
+```docker run --name mysql_container_name -e MYSQL_ROOT_PASSWORD=password_at_ormconfig.json -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=crm -d -p port_at_ormconfig.json:3306 mysql/mysql-server:5.7
+```
+
 ```
 Where "password_at_ormconfig.json" and "port_at_ormconfig.json" are the values specified in ormconfig.json in the fields password and port respectively.
 
