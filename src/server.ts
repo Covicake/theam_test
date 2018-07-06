@@ -31,7 +31,7 @@ const authenticate = expressJwt({secret : config.secret});  // A function to che
 app.use('/static', authenticate, express.static(path.resolve(__dirname, 'images'))); // Static path to store the images, protected with authentication.
 
 app.post('/login', (req, res, next) => {
-    login(req.body).then((response) => res.send(response)).catch((err) => res.send(err));
+    login(req.body).then((response) => res.send(response)).catch((err) => res.status(401).send('Wrong username or password'));
 });
 
 app.use('/user', authenticate, userRouter);

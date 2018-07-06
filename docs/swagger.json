@@ -1,0 +1,527 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "CRM SERVICE"
+  },
+  "host": "localhost:3000",
+  "tags": [
+    {
+      "name": "login",
+      "description": "This endpoint provides the authentication"
+    },
+    {
+      "name": "user",
+      "description": "Operations about users"
+    },
+    {
+      "name": "customer",
+      "description": "Operations about customers"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "authenticate an user in the system",
+        "description": "Checks if the userName and password provided matches the database, then returns an auth token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "string"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User data to log in",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Wrong username or password"
+          }
+        }
+      }
+    },
+    "/static/{imageName}": {
+      "get": {
+        "tags": [
+          "images"
+        ],
+        "summary": "Gets a customer image",
+        "description": "This can only be done by a logged in user",
+        "produces": [
+          "applicatoin/image"
+        ],
+        "parameters": [
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gets a list of users",
+        "description": "This can only be done by a logged in user with admin condition.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "401": {
+            "description": "Unaothorized"
+          },
+          "default": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "response": null
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by a logged in user with admin condition.",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unaothorized"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Updates one user's data",
+        "description": "This can only be done by a logged in user with admin condition.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "string"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Required user id",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New user data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "default": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletes the user with the specified id",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Required user id",
+            "required": true
+          }
+        ],
+        "produces": [
+          "string"
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gets the user with the specified id",
+        "description": "This can only be done by a logged in user with admin condition",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/customer/": {
+      "get": {
+        "tags": [
+          "customer"
+        ],
+        "summary": "Gets a list of all customers",
+        "description": "This can only be done by a logged in user",
+        "produces": [
+          "array of objects"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Customers"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "customer"
+        ],
+        "summary": "Creates a new customer",
+        "description": "This can only be done by a logged in user",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "401": {
+            "description": "Unaothorized"
+          }
+        }
+      }
+    },
+    "/customer/{id}": {
+      "get": {
+        "tags": [
+          "customer"
+        ],
+        "summary": "Gets a customer with the provided id",
+        "description": "This can only be done by a logged in user",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "The id of the required customer",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "produces": [
+          "array of objects"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "customer"
+        ],
+        "summary": "Updates one customer's data",
+        "description": "This can only be done by a logged in user",
+        "produces": [
+          "string"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "The id of the required customer",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "name": "body",
+            "description": "The customer's new data",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "customer"
+        ],
+        "summary": "Deletes one customer by id",
+        "description": "This can only be done by a logged in user",
+        "produces": [
+          "string"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "The id of the required customer",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Carlos"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Garcia"
+        },
+        "birthYear": {
+          "type": "string",
+          "example": "1954"
+        },
+        "imageName": {
+          "type": "string",
+          "example": "cat.jpg"
+        },
+        "createdBy": {
+          "type": "string",
+          "example": "Covicake"
+        },
+        "lastUpdatedBy": {
+          "type": "string",
+          "example": "Admin"
+        }
+      }
+    },
+    "Customers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Customer"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Fernando"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Garcia"
+        },
+        "birthYear": {
+          "type": "string",
+          "example": "1993"
+        },
+        "userName": {
+          "type": "string",
+          "example": "Covicake"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/User"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Tag"
+      }
+    },
+    "Login": {
+      "type": "object",
+      "required": [
+        "userName",
+        "password"
+      ],
+      "properties": {
+        "userName": {
+          "type": "string",
+          "example": "admin"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

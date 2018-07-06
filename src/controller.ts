@@ -26,7 +26,7 @@ export function login(body) {
         const results = checkPassword(body.userName, body.password);
         results.then((isValid) => {
             if (isValid !== true) {
-                reject('Incorrect password');
+                reject(401);
             } else {
 
                 const payload = {  // Sets the information that needs to be included within the token.
@@ -38,6 +38,6 @@ export function login(body) {
                 });
                 resolve(token);  // Sends the token back to the client.
             }
-        }).catch(() => reject('Invalid password'));
+        }).catch(() => reject(401));
     });
 }

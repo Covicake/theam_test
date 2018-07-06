@@ -11,7 +11,10 @@ export class User {
     @Column()
     lastName: string;
 
-    @Column()
+    @Column({
+        type: 'varchar',
+        default: ''
+    })
     birthYear: string;
 
     @Column({

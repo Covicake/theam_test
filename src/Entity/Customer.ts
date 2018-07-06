@@ -17,14 +17,17 @@ export class Customer {
     })
     lastName: string;
 
-    @Column()
-    birthYear: number;
+    @Column({
+        type: 'varchar',
+        default: ''
+    })
+    birthYear: string;
 
     @Column({
         type: 'varchar',
         nullable: false
     })
-    imagePath: string;
+    imageName: string;
 
     @Column()
     createdBy: string;

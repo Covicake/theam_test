@@ -34,6 +34,7 @@ exit;
 ```
 
 Now you can log in with userName: admin and password: "1". Make sure to create a new admin user and delete the one you created earlier.
+
 ---
 
 ## Technologies used:
