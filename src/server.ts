@@ -12,6 +12,10 @@ import * as expressJwt from 'express-jwt';
 const config = require('../config');
 
 import * as path from 'path';
+import { UserRepository } from './Repository/User-Repository';
+
+import { hashPass } from './api/user/controller';
+import { User } from './Entity/User';
 
 
 createConnection().then(connection => {  // Establish conection between typeORM and database using the ormconfig.json file.
@@ -20,9 +24,27 @@ createConnection().then(connection => {  // Establish conection between typeORM 
 const app = express();
 app.use(express.json());  // Tells express to parse the request as a json file.
 
+const userRepo = new UserRepository();
+
 const authenticate = expressJwt({secret : config.secret});  // A function to check if a token is valid, if so decode it and return the underlying user data.
 
 app.use('/static', authenticate, express.static(path.resolve(__dirname, 'images'))); // Static path to store the images, protected with authentication.
+
+app.get('/', (req, res, next) => {
+    userRepo.getUsersList().then((result) => {
+        if (result.length === 0) {
+            const newUser = new User();
+            newUser.name = 'admin';
+            newUser.lastName = 'admin';
+            newUser.isAdmin = true;
+            newUser.userName = 'admin';
+            hashPass('1').then((hashed) => {
+                newUser.password = hashed;
+                userRepo.createUser(newUser).then(() => next()).catch(() => next());
+            });
+        } else { next(); }
+    });
+});
 
 app.post('/login', (req, res, next) => {
     login(req.body).then((response) => res.send(response)).catch((err) => res.send(err));

@@ -6,7 +6,7 @@ const config = require('../../../config');
 
 const userRepo = new UserRepository();
 
-function hashPass(password) {
+export function hashPass(password) {
     return bcrypt.hash(password, 10);
 }
 
