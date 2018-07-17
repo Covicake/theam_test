@@ -1,24 +1,26 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src/server.ts",
-    "sourceMap": true,
-    "module": "commonjs",
-    "target": "es5",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-        "dom",
-        "es2017"
-    ]
-  },
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "dist",
     "build",
     "node_modules"
   ],
-
+  "compilerOptions": {
+    "lib": ["es6"],
+    "types": ["node"],
+    "target": "es6",
+    "pretty": true,
+    "module": "commonjs",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+  },
 }
