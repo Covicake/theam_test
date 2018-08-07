@@ -1,4 +1,4 @@
-# The Agile Monkeys test nº2
+# Node.js Api
 
 REST API to manage a little shop.
 
